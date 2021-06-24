@@ -1,5 +1,5 @@
 // Dependencies
-import React from "react";
+import React, { useContext } from "react";
 import { Helmet } from "react-helmet"; // Header modifier
 import { Link } from "react-router-dom";
 // Elements (Each one is a styled HTML element)
@@ -23,6 +23,8 @@ import { ReactComponent as EditIcon } from "../images/editar.svg";
 import { ReactComponent as DeleteIcon } from "../images/borrar.svg";
 import { Button } from "../elements/Button";
 // Context
+import ThemeContext from "../context/ThemeContext";
+import LanguageContext from "../context/LanguageContext";
 // import { useAuth } from "../context/AuthContext";
 // Components
 import TotalExpenseBar from "./TotalExpenseBar";
@@ -34,7 +36,11 @@ import { format, fromUnixTime } from "date-fns"; // format any date with format(
 import { en } from "date-fns/locale"; // English language (default)
 import deleteExpense from "../firebase/deleteExpense";
 
-const ExpenseList = ({darkMode, texts}) => {
+const ExpenseList = () => {
+  const { texts } = useContext(LanguageContext)
+
+  const { darkMode } = useContext(ThemeContext)
+
   // Extract 'user' value from context
   // const { user } = useAuth();
   // const context = useAuth(); // Initialize context hook
@@ -134,7 +140,7 @@ const ExpenseList = ({darkMode, texts}) => {
           </SubtitleContainer>
         )}
       </List>
-      <TotalExpenseBar texts={texts} />
+      <TotalExpenseBar/>
     </>
   );
 };

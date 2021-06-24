@@ -1,13 +1,16 @@
 // Dependencies
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 // Elements
 import theme from "../theme";
 import AmountFormat from "../functions/CurrencyConverter"; //currency converter
 // Context
 import { useTotalExpenseMonthyContext } from "../context/TotalExpenseMonthy.Contex"; // Access global state of TotalExpense
+import LanguageContext from "../context/LanguageContext";
 
-const TotalExpenseBar = ({texts}) => {
+const TotalExpenseBar = () => {
+  const { texts } = useContext(LanguageContext) 
+
   const { total } = useTotalExpenseMonthyContext(); // Extract a value from Context main
   // console.log(total)
   // Use 'total' value in this component

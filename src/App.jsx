@@ -1,5 +1,5 @@
 // Dependencies
-import React from "react";
+import React, { useContext } from "react";
 import { Helmet } from "react-helmet";
 // Components
 import ExpenseForm from "./components/ExpenseForm";
@@ -13,7 +13,12 @@ import {
 } from "./elements/Header";
 import { Button } from "./elements/Button"; // En realidad es un 'Link' con estilos de botón
 import SignOutButton from "./elements/SignOutButton";
-const App = ({ handlerDarkMode, darkMode, handleLanguage, texts }) => {
+import ThemeContext from "./context/ThemeContext";
+import LanguageContext from "./context/LanguageContext";
+const App = () => {
+  const { texts, handleLanguage } = useContext(LanguageContext)
+  const { darkMode, handlerDarkMode } = useContext(ThemeContext)
+
   // Dark mode
   const handleDarkMode = (event) => {
     if (event.target.value === "dark") {
@@ -58,6 +63,7 @@ const App = ({ handlerDarkMode, darkMode, handleLanguage, texts }) => {
       </Header>
       <ExpenseForm darkMode={darkMode} texts={texts} /> {/* Main expensive form */}
       <TotalExpenseBar darkMode={darkMode} texts={texts} />
+      
     </>
   );
 };

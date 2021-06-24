@@ -1,5 +1,5 @@
 // Dependencies
-import React from "react";
+import React, { useContext } from "react";
 import { Helmet } from "react-helmet"; // Header modifier
 // Elements (Each one is a styled HTML element)
 import { Header, Title } from "../elements/Header";
@@ -10,8 +10,11 @@ import ExpenseForm from "./ExpenseForm";
 // Hooks
 import { useParams } from "react-router-dom";
 import useGetExpense from "../hooks/useGetExpense";
+import LanguageContext from "../context/LanguageContext";
 
-const EditExpense = ({texts}) => {
+const EditExpense = () => {
+  const { texts } = useContext(LanguageContext) 
+
   const { id } = useParams(); // URL params (/:id)
   const [expense] = useGetExpense(id); // returns the specified expense/doc. with its info.
   // console.log(expense)
@@ -24,8 +27,8 @@ const EditExpense = ({texts}) => {
         <ButtonReturn route="/list" />
         <Title>{texts.titleUpdateSection}</Title>
       </Header>
-      <ExpenseForm expense={expense} id={id} texts={texts} />
-      <TotalExpenseBar texts={texts}/>
+      <ExpenseForm expense={expense} id={id}  />
+      <TotalExpenseBar />
     </>
   );
 };

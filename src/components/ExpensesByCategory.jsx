@@ -1,5 +1,5 @@
 // Dependencies
-import React from "react";
+import React, { useContext } from "react";
 import { Helmet } from "react-helmet"; // Header modifier
 // Elements (Each one is a styled HTML element)
 import { Header, Title } from "../elements/Header";
@@ -16,11 +16,16 @@ import TotalExpenseBar from "./TotalExpenseBar";
 // Hooks
 import useGetMonthExpensesByCategory from "../hooks/useGetMonthExpensesByCategory";
 //import useGetExpenseByMonth from "../hooks/useGetExpenseByMonth";
-
 // Functions
 import currencyConverter from "../functions/CurrencyConverter";
+// Context
+import ThemeContext from "../context/ThemeContext";
+import LanguageContext from "../context/LanguageContext";
 
-const ExpensesByCategory = ({darkMode, texts}) => {
+const ExpensesByCategory = () => {
+  const { texts } = useContext(LanguageContext)
+
+  const { darkMode } = useContext(ThemeContext)
   /* const ex = useGetExpenseByMonth(); // Returns an array with expenses of month
   console.log(ex) */
   const expensesByCategory = useGetMonthExpensesByCategory(); // Returns Total expense data/docs/expenses by category
@@ -52,7 +57,7 @@ const ExpensesByCategory = ({darkMode, texts}) => {
           );
         })}
       </CategoriesList>
-      <TotalExpenseBar texts={texts}/>
+      <TotalExpenseBar />
     </>
   );
 };

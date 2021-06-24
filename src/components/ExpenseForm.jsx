@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import fromUnixTime from "date-fns/fromUnixTime"; // get timestamp from UnixTime
 import getUnixTime from "date-fns/getUnixTime"; // get abstract date (digits) from timestamp
 // Elements
@@ -22,9 +22,12 @@ import editExpense from "../firebase/editExpense"; // function to update a docum
 // Hooks
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../context/AuthContext"; // Context to extract user info.
+import LanguageContext from "../context/LanguageContext";
 
 // 'expense' and 'id' prop is set in edit Form
-const ExpenseForm = ({ expense, id, darkMode, texts }) => {
+const ExpenseForm = ({ expense, id, darkMode }) => {
+  const { texts } = useContext(LanguageContext)
+
   // Inputs states
   const [inputDescription, setInputDescription] = useState("");
   const [inputValue, setInputValue] = useState("");
